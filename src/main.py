@@ -1,0 +1,28 @@
+from src.DBManager import DBManager
+
+
+def main():
+    new = DBManager('localhost', 'vacancies_hh', 'postgres', 7856)
+    print(f'''Что вы хотите увидеть?:
+          1 - Посмотреть список всех компаний и количество вакансий у каждой компании;
+          2 - Посмотреть список всех вакансий с указанием названия компании, названия вакансии и зарплаты и ссылки на вакансию;
+          3 - Посмотреть среднюю зарплату по всем вакансиям;
+          4 - Посмотреть список всех вакансий, у которых зарплата выше средней по всем вакансиям;
+          5 - Посмотреть список всех вакансий, в названии которых содержатся запрашиваемое слово.''')
+    user_input = input('Введите цифру: ')
+    if user_input == '1':
+        print(new.get_companies_and_vacancies_count())
+    if user_input == '2':
+        print(new.get_all_vacancies())
+    elif user_input == '3':
+        print(new.get_avg_salary())
+    elif user_input == '4':
+        print(new.get_vacancies_with_higher_salary())
+    elif user_input == '5':
+        keyword = input('По какому слову будем искать?: ')
+        print(new.get_vacancies_with_keyword(keyword))
+    else:
+        print('Некорректный ввод')
+
+
+main()

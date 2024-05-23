@@ -1,4 +1,6 @@
 from src.DBManager import DBManager
+from src.conn_database import connection
+from src.func import get_company, save_vacancy
 
 
 def main():
@@ -11,16 +13,21 @@ def main():
           5 - Посмотреть список всех вакансий, в названии которых содержатся запрашиваемое слово.''')
     user_input = input('Введите цифру: ')
     if user_input == '1':
-        print(new.get_companies_and_vacancies_count())
+        for i in new.get_companies_and_vacancies_count():
+            print(f'Компания:{i[0]}, Количество вакансий:{i[1]}')
     if user_input == '2':
-        print(new.get_all_vacancies())
+        for i in new.get_all_vacancies():
+            print(f'Компания:{i[0]}, Вакансия:{i[1]}, Зарплата от {i[2]} до {i[3]}, Ссылка:{i[4]}')
     elif user_input == '3':
-        print(new.get_avg_salary())
+        for i in new.get_avg_salary():
+            print(f'Средняя зарплата по всем вакансиям: {i[0]}')
     elif user_input == '4':
-        print(new.get_vacancies_with_higher_salary())
+        for i in new.get_vacancies_with_higher_salary():
+            print(f'Вакансия: {i[0]}, Зарплата от {i[1]}')
     elif user_input == '5':
         keyword = input('По какому слову будем искать?: ')
-        print(new.get_vacancies_with_keyword(keyword))
+        for i in new.get_vacancies_with_keyword(keyword):
+            print(i)
     else:
         print('Некорректный ввод')
 
